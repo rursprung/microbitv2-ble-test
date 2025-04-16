@@ -11,9 +11,9 @@ test = false
 bench = false
 
 [dependencies]
-defmt = "0.3"
-defmt-rtt = "0.4"
-panic-probe = { version = "0.3", features = ["print-defmt"] }
+defmt = "1"
+defmt-rtt = "1"
+panic-probe = { version = "1", features = ["print-defmt"] }
 
 embedded-hal = "1.0.0"
 embedded-hal-async = "1.0.0"
@@ -24,16 +24,12 @@ embedded-storage = "0.3.1"
 cortex-m-rt = "0.7.3"
 
 cortex-m = { version = "0.7.6", features = ["critical-section-single-core"] }
-embassy-nrf = { version = "0.3", features = ["defmt", "nrf52833", "time-driver-rtc1", "gpiote", "unstable-pac", "time"] }
+embassy-nrf = { version = "0.3", features = ["defmt", "nrf52833", "time-driver-rtc1", "gpiote"] }
 embassy-executor = { version = "0.7", features = ["task-arena-size-1024", "arch-cortex-m", "executor-thread", "defmt", "executor-interrupt"] }
 embassy-sync = { version = "0.6" }
 embassy-time = { version = "0.4", features = ["defmt", "defmt-timestamp-uptime"] }
-[profile.release]
-debug = 2
-lto = true
-opt-level = 'z'
+nrf-softdevice = { version = "0.1", features = ["defmt", "nrf52833", "s140", "ble-peripheral", "ble-central", "critical-section", "ble-l2cap", "ble-gatt-server"] }
+log = "0.4.27"
 
-[profile.dev]
-debug = 2
-lto = true
-opt-level = "z"
+[patch.crates-io]
+nrf-softdevice = { git = "https://github.com/embassy-rs/nrf-softdevice.git", branch = "master" }
